@@ -11,9 +11,14 @@
 |
 */
 
+use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Laravel\Sanctum\Sanctum;
+
+use function Pest\Laravel\actingAs;
+
 pest()->extend(Tests\TestCase::class)
- // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature');
+    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -25,11 +30,6 @@ pest()->extend(Tests\TestCase::class)
 | to assert different things. Of course, you may extend the Expectation API at any time.
 |
 */
-
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
-});
-
 /*
 |--------------------------------------------------------------------------
 | Functions
@@ -41,7 +41,24 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+/**
+ * @param  null  $user
+ * @return mixed
+ */
+function signIn($user = null)
 {
-    // ..
+    /** @var Authenticatable $user */
+    $user = $user ?: User::factory()->create();
+
+    actingAs($user);
+}
+
+/**
+ * @param  null  $user
+ * @return mixed
+ */
+function apiSignIn($user = null)
+{
+    $user = $user ?: User::factory()->create();
+    Sanctum::actingAs($user, ['*']);
 }

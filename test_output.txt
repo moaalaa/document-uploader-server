@@ -1,0 +1,25 @@
+
+   FAIL  Tests\Feature\VideoApiTest
+  Γ¿»ΓÇª  0.54s  
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ  
+   FAILED  Tests\Feature\VideoApiTest > can create video with provided title and description  BadMethodCallException   
+  Call to undefined method App\Models\User::withAccessToken()
+
+  at vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:67
+     63Γûò      * @throws \BadMethodCallException
+     64Γûò      */
+     65Γûò     protected static function throwBadMethodCallException($method)
+     66Γûò     {
+  Γ₧£  67Γûò         throw new BadMethodCallException(sprintf(
+     68Γûò             'Call to undefined method %s::%s()', static::class, $method
+     69Γûò         ));
+     70Γûò     }
+     71Γûò }
+
+  1   vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:67
+  2   vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:36
+
+
+  Tests:    1 failed, [2m2 pending[22m (0 assertions)
+  Duration: 0.94s
+
