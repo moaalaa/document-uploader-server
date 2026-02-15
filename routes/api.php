@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VideoController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', fn (Request $request) => $request->user());
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::get('/user', [AuthController::class, 'user'])->middleware('auth:sanctum');
 
 Route::apiResource('videos', VideoController::class)->middleware('auth:sanctum');

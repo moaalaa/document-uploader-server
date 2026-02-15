@@ -1,0 +1,310 @@
+{
+    "info": {
+        "_postman_id": "f8c4e4d0-6e3a-4b5c-9c7d-1e2f3a4b5c6d",
+        "name": "Document Uploader API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Auth",
+            "item": [
+                {
+                    "name": "Register",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Test User\",\n    \"email\": \"test@example.com\",\n    \"password\": \"password\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{url}}/register",
+                            "host": ["{{url}}"],
+                            "path": ["api", "register"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Login",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "if (pm.response.code === 200) {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.collectionVariables.set(\"token\", jsonData.access_token);",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"password\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{url}}/login",
+                            "host": ["{{url}}"],
+                            "path": ["api", "login"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Logout",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/logout",
+                            "host": ["{{url}}"],
+                            "path": ["api", "logout"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get User",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/user",
+                            "host": ["{{url}}"],
+                            "path": ["api", "user"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Videos",
+            "item": [
+                {
+                    "name": "List Videos",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/videos",
+                            "host": ["{{url}}"],
+                            "path": ["api", "videos"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Show Video",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/videos/{{video_id}}",
+                            "host": ["{{url}}"],
+                            "path": ["api", "videos", "{{video_id}}"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Video",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "title",
+                                    "value": "My New Video",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "description",
+                                    "value": "This is a description of the new video.",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "video",
+                                    "type": "file",
+                                    "src": []
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{url}}/videos",
+                            "host": ["{{url}}"],
+                            "path": ["api", "videos"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Video (PUT via POST)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "_method",
+                                    "value": "PUT",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "title",
+                                    "value": "Updated Video Title",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "description",
+                                    "value": "Updated description.",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "video",
+                                    "type": "file",
+                                    "src": []
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{url}}/videos/{{video_id}}",
+                            "host": ["{{url}}"],
+                            "path": ["api", "videos", "{{video_id}}"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Video",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/videos/{{video_id}}",
+                            "host": ["{{url}}"],
+                            "path": ["api", "videos", "{{video_id}}"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "token",
+                "value": "{{token}}",
+                "type": "string"
+            }
+        ]
+    },
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [""]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [""]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "url",
+            "value": "http://localhost:8000",
+            "type": "string"
+        },
+        {
+            "key": "token",
+            "value": "YOUR_ACCESS_TOKEN_HERE",
+            "type": "string"
+        },
+        {
+            "key": "video_id",
+            "value": "1",
+            "type": "string"
+        }
+    ]
+}

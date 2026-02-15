@@ -36,7 +36,7 @@ class VideoController extends Controller
             'creator_id' => auth()->id(),
         ]);
 
-        return response()->json($video, Response::HTTP_OK);
+        return response()->json($video, Response::HTTP_CREATED);
     }
 
     /**
