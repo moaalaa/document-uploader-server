@@ -22,9 +22,9 @@ class UpdateVideoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'       => ['required', 'string', 'max:100'],
-            'description' => ['required', 'string', 'max:100'],
-            'video'       => ['required', 'file', 'mimetypes:video/mp4,video/x-m4v,video/*'],
+            'title'       => ['nullable', 'string', 'max:100'],
+            'description' => ['nullable', 'string', 'max:100'],
+            'video'       => ['nullable', 'file', 'mimetypes:video/mp4,video/x-m4v,video/*'],
         ];
     }
 }

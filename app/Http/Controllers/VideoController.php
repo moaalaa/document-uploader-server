@@ -33,6 +33,7 @@ class VideoController extends Controller
 
         $video = Video::create([
             ...$validated,
+            'video_url' => $request->file('video')->store('videos', 'public'),
             'creator_id' => auth()->id(),
         ]);
 
@@ -56,7 +57,14 @@ class VideoController extends Controller
     {
         // Gate::authorize('update', $video);
 
-        $video->update($request->validated());
+        if ($request->hasFile('video')) {
+            $video->update([
+                ...$request->validated(),
+                'video_url' => $request->file('video')->store('videos', 'public'),
+            ]);
+        } else {
+            $video->update($request->validated());
+        }
 
         return response()->json($video, Response::HTTP_OK);
     }
