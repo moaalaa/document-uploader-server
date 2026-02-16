@@ -11,7 +11,7 @@ class StoreVideoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->check();
+        return true;
     }
 
     /**
@@ -24,6 +24,10 @@ class StoreVideoRequest extends FormRequest
         return [
             'title'       => ['nullable', 'string', 'max:100'],
             'description' => ['nullable', 'string', 'max:100'],
+            'file_size'   => ['nullable', 'numeric'],
+            'duration'    => ['nullable', 'string'],
+            'resolution'  => ['nullable', 'string', 'max:100'],
+            'format'      => ['nullable', 'string', 'max:100'],
             'video'       => ['required', 'file', 'mimetypes:video/mp4,video/x-m4v,video/*'],
         ];
     }
