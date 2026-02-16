@@ -1,0 +1,10 @@
+---
+config:
+  theme: mc
+---
+flowchart TD
+    A@{ shape: sm-circ, label: "Start" } --> B["User uploads video"]
+    B --> C["Video sent to Server"]
+    C --> D["Server validates video"]
+    D --> E@{ shape: cyl, label: "Save video to Database" }
+    E --> F@{ shape: dbl-circ, label: "Success" }

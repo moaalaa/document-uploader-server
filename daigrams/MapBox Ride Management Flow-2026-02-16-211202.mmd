@@ -1,0 +1,9 @@
+sequenceDiagram
+    actor User
+    participant Server
+    participant Database
+
+    User-->>Server: Upload video
+    Server->>Database: Save video
+    Database-->>Server: Save confirmation
+    Server-->>User: Success response
