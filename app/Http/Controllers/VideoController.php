@@ -47,6 +47,9 @@ class VideoController extends Controller
     {
         // Gate::authorize('view', $video);
 
+        // get the video url in the response 
+        $video->video_url = asset('storage/' . $video->video_url);
+
         return response()->json($video, Response::HTTP_OK);
     }
 
